@@ -6,7 +6,7 @@ from pygame.locals import *
 #constants
 WINSIZE = [640, 480]
 WINCENTER = [320, 240]
-NUMSTARS = 9000
+NUMSTARS = 1500
 
 
 def init_star():
@@ -80,7 +80,7 @@ def main():
                 break
             else:
                 WINCENTER[:] = pygame.mouse.get_pos()
-        clock.tick(30)
+        clock.tick(1000)
 
 
 # if python says run, then we should run
