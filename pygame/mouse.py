@@ -21,6 +21,5 @@ while 1:
     screen.blit(trail, ballrect)
     mouse_pos = pygame.mouse.get_pos()
     ballrect.center = mouse_pos
-    print ballrect.center, mouse_pos
     screen.blit(ball, ballrect)
     pygame.display.flip()
