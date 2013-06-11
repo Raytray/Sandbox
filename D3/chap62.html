@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Page Template</title>
+        <script type="text/javascript" src="js/d3.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+    	  var dataset = [];
+	  for (var i = 0; i < 25; i++) {
+	      var newNumber = Math.random() * 500;
+	      dataset.push(newNumber);
+	  }
+
+	  var max_of_array = Math.max.apply(Math, dataset);
+
+	  var w = 800;
+	  var h = 500;
+	  var bar_padding = 2;
+	  var svg = d3.select("body")
+	  .append("svg")
+	  .attr("width", w)
+	  .attr("height", h);
+
+	  svg.selectAll("rect")
+	  .data(dataset)
+	  .enter()
+	  .append("rect")
+    	  .attr("fill", function(d) {
+	      return "rgb(0, 0, " + (d * 10) + ")";
+	  })
+	  .attr("x", function (d, i){
+	      return i * (w / dataset.length - bar_padding);
+	  })
+	  .attr("y", function (d) {
+	      return h - (d/ max_of_array * 300);
+	  })
+	  .attr("width", 20)
+	  .attr("height", function(d) {
+	      return d;
+	  });
+        </script>
+    </body>
+</html>
