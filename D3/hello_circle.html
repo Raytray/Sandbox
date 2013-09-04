@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="js/d3.js"></script>
+        <!-- <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script>-->
+    </head>
+    <body>
+        <div id="viz"></div>
+        <script type="text/javascript">
+
+            var sampleSVG = d3.select("#viz")
+            .append("svg")
+            .attr("width", 900)
+            .attr("height", 900);
+
+            sampleSVG.append("circle")
+            .style("stroke", "gray")
+            .style("fill", "white")
+            .attr("r", 400)
+            .attr("cx", 400)
+            .attr("cy", 400)
+    	    .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
+            .on("mouseout", function(){d3.select(this).style("fill", "white");})
+          .transition()
+            .delay(1000)
+            .duration(10000)
+            .attr("r", 350)
+            .attr("cx", 450)
+            .attr("cy", 450);
+
+        </script>
+    </body>
+</html>
