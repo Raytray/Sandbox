@@ -1,10 +1,16 @@
 import wikipedia
 import tldextract
+import pprint
+
+from collections import defaultdict
 
 reference_list = []
 count = 0
 
-while len(reference_list) < 500 or count < 100:
+reference_dict = defaultdict(int)
+
+
+while len(reference_list) < 1000 or count < 200:
     try:
         random_page = wikipedia.page(wikipedia.random())
         print random_page.title
@@ -19,3 +25,9 @@ while len(reference_list) < 500 or count < 100:
         continue
 
 print "total refs:", len(reference_list), "total pages:", count
+
+
+for ref in reference_list:
+    reference_dict[tldextract.extract(ref).domain] += 1
+
+pprint.pprint(dict(reference_dict))
