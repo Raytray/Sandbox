@@ -6,10 +6,10 @@ class UsersController extends AppController {
             $this->redirect($this->Auth->redirect()); // somewhere else…
         }
         $uniqid = $_COOKIE['REMOTE_AUTH'];
-        setcookie("REMOTE_AUTH","",0,"/~rt2ck");
+        setcookie("REMOTE_AUTH","",0,"/~rt2ck/hw2-cake");
 
-        $this->loadModel("Authentication");
-        $search = $this->Authentication->find('first', array('conditions'=>array('value'=>$uniqid,'valid'=>1)));
+        $this->loadModel("Netbadge");
+        $search = $this->Netbadge->find('first', array('conditions'=>array('value'=>$uniqid,'valid'=>1)));
         $this->set('who',$search['User']['username']);
         // log in user
         if ($this->Auth->login($search['User']))

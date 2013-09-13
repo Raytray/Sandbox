@@ -14,12 +14,4 @@ class NetbadgesController extends AppController {
         }
         return true;
     }
-
-/**
- * Scaffold
- *
- * @var mixed
- */
-	public $scaffold;
-
 }
