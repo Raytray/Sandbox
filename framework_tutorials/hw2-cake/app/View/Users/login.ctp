@@ -7,5 +7,6 @@
         echo $this->Form->input('password');
     ?>
     </fieldset>
+<p>To login via Netbadge, click <a href="/~rt2ck/hw2-cake/netbadge">here</a>.</p>
 <?php echo $this->Form->end(__('Login')); ?>
 </div>

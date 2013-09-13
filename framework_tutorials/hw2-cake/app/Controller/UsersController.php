@@ -1,8 +1,27 @@
 <?php
 class UsersController extends AppController {
+    public function netbadge() {
+        if ( !isset($_COOKIE['REMOTE_AUTH']) ) {
+            $this->Session->setFlash(__('This only works with netbadge (aka pubcookie).'));
+            $this->redirect($this->Auth->redirect()); // somewhere else…
+        }
+        $uniqid = $_COOKIE['REMOTE_AUTH'];
+        setcookie("REMOTE_AUTH","",0,"/~rt2ck");
+
+        $this->loadModel("Authentication");
+        $search = $this->Authentication->find('first', array('conditions'=>array('value'=>$uniqid,'valid'=>1)));
+        $this->set('who',$search['User']['username']);
+        // log in user
+        if ($this->Auth->login($search['User']))
+            $this->Session->setFlash(__('Successful netbadge login'));
+        else
+            $this->Session->setFlash(__('Something went wrong with netbage…'));
+        $this->redirect($this->Auth->redirect());
+    }
+
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add'); // Letting users register themselves
+        $this->Auth->allow('add', 'logout', 'login', 'netbadge'); // Letting users register themselves
     }
 
     public function login() {
