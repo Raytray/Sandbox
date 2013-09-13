@@ -33,6 +33,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
     public $components = array('DebugKit.Toolbar',
+                               'SQLLog',
                                'Session',
                                'Auth' => array(
                                                'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
@@ -52,6 +53,7 @@ class AppController extends Controller {
     }
 
     public function beforeFilter() {
+        $this->SQLLog->LogEvent();
         $this->Auth->allow('index', 'view');
     }
 }

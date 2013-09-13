@@ -32,4 +32,19 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+    private static $lastLogID = 0, $lastInsID = 0;
+
+    public function afterSave() {
+        global $lastLogID, $lastInsID;
+        if ( $this->name == "Log" )
+            $lastLogID = $this->id;
+        else {
+            $lastInsID = $this->id;
+            // Yes, this is calling an action from the model when it should
+            // be calling it from the controller instead.  But after chasing
+            // a ridiculous CakePHP bug (or perhaps it was a PHP bug) for an
+            // hour, I don't care.  It's 3 a.m.  Deal with it.
+            SQLLogComponent::updateIDForLogEntry($lastLogID,$lastInsID);
+        }
+    }
 }
